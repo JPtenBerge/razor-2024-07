@@ -6,6 +6,8 @@ public class Car
 {
     // data annotations validation
 
+    public int Id { get; set; }
+
     [RegularExpression("^[a-zA-Z -]+$", ErrorMessage = "Alleen letters en spaties graag")]
     public required string Make { get; set; }
 

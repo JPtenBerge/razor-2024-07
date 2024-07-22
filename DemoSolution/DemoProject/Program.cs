@@ -1,3 +1,5 @@
+using DemoProject.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // globale instellingen registreert
@@ -7,6 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 // .Add...()
 
 builder.Services.AddRazorPages();
+
+// side effects.
+
+
+builder.Services.AddSingleton<ICarRepository, CarInMemoryRepository>(); // elke keer een nieuwe
+//builder.Services.AddScoped // elk request een nieuwe
+//builder.Services.AddSingleton // 1 instance to rule them all (zolang je app leeft)
 
 var app = builder.Build();
 

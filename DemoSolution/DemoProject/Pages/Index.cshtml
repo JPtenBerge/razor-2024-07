@@ -3,75 +3,79 @@
 @model DemoProject.Pages.IndexModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-tag helpers
-
-
 <style>
     td img {
         max-width: 200px;
     }
+
     .oud {
         background: lightgoldenrodyellow;
     }
+
+    .flex {
+        display: flex;
+        gap: 1rem;
+    }
 </style>
 
-<form method="post">
-    <ol>
-        <li>
-            <label for="input-make">Make:</label>
-            <input id="input-make" asp-for="NewCar.Make" />
-            <span asp-validation-for="NewCar.Make"></span>
-        </li>
-        <li>
-            <label for="input-model">Model:</label>
-            <input id="input-model" asp-for="NewCar.Model" />
-            <span asp-validation-for="NewCar.Model"></span>
-        </li>
-        <li>
-            <label for="input-year">Year of build:</label>
-            <input id="input-year" asp-for="NewCar.Year" />
-            <span asp-validation-for="NewCar.Year"></span>
-        </li>
-        <li>
-            <label for="input-photo-url">Photo URL:</label>
-            <input id="input-photo-url" asp-for="NewCar.PhotoUrl" />
-            <span asp-validation-for="NewCar.PhotoUrl"></span>
-        </li>
-        <li>
-            @* <input type="submit" value="Submit" /> *@
-            <button>
-                Submit
-                <img />
-            </button>
-        </li>
-    </ol>
-</form>
+<div class="flex">
+    <form method="post">
+        <ol>
+            <li>
+                <label for="input-make">Make:</label>
+                <input id="input-make" asp-for="NewCar.Make" />
+                <span asp-validation-for="NewCar.Make"></span>
+            </li>
+            <li>
+                <label for="input-model">Model:</label>
+                <input id="input-model" asp-for="NewCar.Model" />
+                <span asp-validation-for="NewCar.Model"></span>
+            </li>
+            <li>
+                <label for="input-year">Year of build:</label>
+                <input id="input-year" asp-for="NewCar.Year" />
+                <span asp-validation-for="NewCar.Year"></span>
+            </li>
+            <li>
+                <label for="input-photo-url">Photo URL:</label>
+                <input id="input-photo-url" asp-for="NewCar.PhotoUrl" />
+                <span asp-validation-for="NewCar.PhotoUrl"></span>
+            </li>
+            <li>
+                @* <input type="submit" value="Submit" /> *@
+                <button>
+                    Submit
+                    <img />
+                </button>
+            </li>
+        </ol>
+    </form>
 
-@if (IndexModel.Cars == null || !IndexModel.Cars.Any())
-{
-    <p>Geen auto's vandaag.</p>
-    return;
-}
+    @if (Model.Cars == null || !Model.Cars.Any())
+    {
+        <p>Geen auto's vandaag.</p>
+        return;
+    }
 
-<table>
-    <thead>
-        <tr>
-            <th>Make</th>
-            <th>Model</th>
-            <th>Year of build</th>
-            <th>Photo</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var car in IndexModel.Cars)
-        {
-            <tr class="@(car.Year < 2000 ? "oud" : "")">
-                <td>@car.Make</td>
-                <td>@car.Model</td>
-                <td>@car.Year</td>
-                <td><img src="@car.PhotoUrl"></td>
+    <table>
+        <thead>
+            <tr>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Year of build</th>
+                <th>Photo</th>
             </tr>
-        }
-    </tbody>
-</table>
-
+        </thead>
+        <tbody>
+            @foreach (var car in Model.Cars)
+            {
+                <tr class="@(car.Year < 2000 ? "oud" : "")">
+                    <td>@car.Make</td>
+                    <td>@car.Model</td>
+                    <td>@car.Year</td>
+                    <td><img src="@car.PhotoUrl"></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
