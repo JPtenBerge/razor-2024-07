@@ -1,12 +1,17 @@
-﻿namespace DemoProject.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DemoProject.Entities;
 
 public class Car
 {
-    public string Make { get; set; }
+    // data annotations validation
 
-    public string Model { get; set; }
+    [RegularExpression("^[a-zA-Z -]+$", ErrorMessage = "Alleen letters en spaties graag")]
+    public required string Make { get; set; }
 
-    public int Year { get; set; }
+    public required string Model { get; set; }
 
-    public string PhotoUrl { get; set; }
+    public required int Year { get; set; }
+
+    public required string PhotoUrl { get; set; }
 }

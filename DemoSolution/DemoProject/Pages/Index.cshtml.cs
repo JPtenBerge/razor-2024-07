@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DemoProject.Pages;
 
-public class IndexModel : PageModel
+public class IndexModel : PageModel // bij ieder request wordt deze opnieuw geinstantieerd
 {
     public string Bla { get; set; } = "Hey daar!";
 
-    public List<Car> Cars { get; set; } = new()
+    public static List<Car> Cars { get; set; } = new()
     {
          new()
          {
@@ -33,12 +33,36 @@ public class IndexModel : PageModel
          }
     };
 
+    public Car NewCar { get; set; } = default!;
+
     public void OnGet()
     {
+
     }
 
-    public void OnPost(IFormCollection formData)
+    // page handlers
+
+    public IActionResult OnPost() // model binding  reflection
     {
-        Console.WriteLine($"{formData["makqe"]} {formData["Model"]} is gebouwd in {formData["year"]}");
+        if (!ModelState.IsValid)
+        {
+            Console.WriteLine("dat is NIET valid");
+            return Page();
+        }
+
+        // action results:
+        // - OkResult
+        // - BadRequestResult
+        // - NotFoundResult
+        // - CreatedResult
+        // - ContentResult
+        // - JsonResult
+        // - FileResult
+        // - allerlei redirect
+        // - PageResult
+        // - RedirectToPageResult
+
+        Cars.Add(NewCar);
+        return RedirectToPage();
     }
 }

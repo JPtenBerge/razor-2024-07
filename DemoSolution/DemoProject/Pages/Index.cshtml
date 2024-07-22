@@ -1,11 +1,17 @@
 ﻿@page
+@using DemoProject.Pages
 @model DemoProject.Pages.IndexModel
-@{
-}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+tag helpers
+
 
 <style>
     td img {
         max-width: 200px;
+    }
+    .oud {
+        background: lightgoldenrodyellow;
     }
 </style>
 
@@ -13,19 +19,23 @@
     <ol>
         <li>
             <label for="input-make">Make:</label>
-            <input name="make" id="input-make" />
+            <input id="input-make" asp-for="NewCar.Make" />
+            <span asp-validation-for="NewCar.Make"></span>
         </li>
         <li>
             <label for="input-model">Model:</label>
-            <input name="model" id="input-model" />
+            <input id="input-model" asp-for="NewCar.Model" />
+            <span asp-validation-for="NewCar.Model"></span>
         </li>
         <li>
             <label for="input-year">Year of build:</label>
-            <input name="year" id="input-year" />
+            <input id="input-year" asp-for="NewCar.Year" />
+            <span asp-validation-for="NewCar.Year"></span>
         </li>
         <li>
             <label for="input-photo-url">Photo URL:</label>
-            <input name="photoUrl" id="input-photo-url" />
+            <input id="input-photo-url" asp-for="NewCar.PhotoUrl" />
+            <span asp-validation-for="NewCar.PhotoUrl"></span>
         </li>
         <li>
             @* <input type="submit" value="Submit" /> *@
@@ -35,14 +45,9 @@
             </button>
         </li>
     </ol>
-
-    @Html.AntiForgeryToken()
 </form>
 
-
-
-
-@if (Model.Cars == null || !Model.Cars.Any())
+@if (IndexModel.Cars == null || !IndexModel.Cars.Any())
 {
     <p>Geen auto's vandaag.</p>
     return;
@@ -58,9 +63,9 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var car in Model.Cars)
+        @foreach (var car in IndexModel.Cars)
         {
-            <tr>
+            <tr class="@(car.Year < 2000 ? "oud" : "")">
                 <td>@car.Make</td>
                 <td>@car.Model</td>
                 <td>@car.Year</td>
