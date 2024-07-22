@@ -1,8 +1,10 @@
+using DemoProject.DataAccess;
 using DemoProject.Entities;
 using DemoProject.Repositories;
 using DemoProject.Validators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // .Add...()
 
+builder.Services.AddDbContext<DemoContext>(options =>
+{
+    options.UseSqlServer("Server=.\\SQLEXPRESS; Initial Catalog=demodb; Integrated Security=true; TrustServerCertificate=true");
+}, ServiceLifetime.Transient);
+
 builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<IValidator<Car>, CarValidator>();
@@ -20,11 +27,11 @@ builder.Services.AddFluentValidationAutoValidation(options =>
     options.DisableDataAnnotationsValidation = true;
 });
 
-
 // side effects.
 
+//builder.Services.AddSingleton<ICarRepository, CarInMemoryRepository>(); // elke keer een nieuwe
+builder.Services.AddTransient<ICarRepository, CarDbRepository>(); // elke keer een nieuwe
 
-builder.Services.AddSingleton<ICarRepository, CarInMemoryRepository>(); // elke keer een nieuwe
 //builder.Services.AddScoped // elk request een nieuwe
 //builder.Services.AddSingleton // 1 instance to rule them all (zolang je app leeft)
 
