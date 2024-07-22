@@ -9,9 +9,38 @@
     }
 </style>
 
-Hallo en welkom bij mijn pagina.
+<form method="post">
+    <ol>
+        <li>
+            <label for="input-make">Make:</label>
+            <input name="make" id="input-make" />
+        </li>
+        <li>
+            <label for="input-model">Model:</label>
+            <input name="model" id="input-model" />
+        </li>
+        <li>
+            <label for="input-year">Year of build:</label>
+            <input name="year" id="input-year" />
+        </li>
+        <li>
+            <label for="input-photo-url">Photo URL:</label>
+            <input name="photoUrl" id="input-photo-url" />
+        </li>
+        <li>
+            @* <input type="submit" value="Submit" /> *@
+            <button>
+                Submit
+                <img />
+            </button>
+        </li>
+    </ol>
 
-bla: @(Model.Bla == "hoi" ? "nope" : Model.Bla.ToUpper())
+    @Html.AntiForgeryToken()
+</form>
+
+
+
 
 @if (Model.Cars == null || !Model.Cars.Any())
 {

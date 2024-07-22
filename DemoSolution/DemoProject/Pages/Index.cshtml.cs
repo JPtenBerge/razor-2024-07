@@ -36,4 +36,9 @@ public class IndexModel : PageModel
     public void OnGet()
     {
     }
+
+    public void OnPost(IFormCollection formData)
+    {
+        Console.WriteLine($"{formData["makqe"]} {formData["Model"]} is gebouwd in {formData["year"]}");
+    }
 }
