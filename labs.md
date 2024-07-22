@@ -48,11 +48,12 @@ We gaan een todo-applicatie maken.
 12. Maak een Blazor WebAssembly-project die todo's toont op de pagina.
 
 13. Pas je Blazor-project aan het todo's ophaalt en weergeeft van de server.
+    - Olivier-challenge: End-to-end je Blazor-project middels [Playwright](https://playwright.dev/).
 
 14. Als een ander familielid todo's toevoegt, zouden deze instant zichtbaar moeten zijn voor alle andere familieleden. Gebruik SignalR om je app realtime te maken.
 
     Dit mag je zowel doorvoeren bij je Blazor-app met C# OF bij je Razor Page middels JavaScript.
 
 15. Onze todo-app wordt gebruikt door hele families! Sla bij elke todo op welk familielid de todo heeft toegevoegd. Men mag dus enkel todo's toevoegen als men is ingelogd. In de lijst van todo's, toon de naam van het familielid die de todo heeft toegevoegd.
-   - Olivier-challenge: men mag todo's verwijderen als die door hem-/haarzelf is aangemaakt.
-   - Olivier-extra-challenge: implementeer die autorisatie (verwijderen van todo) zowel in de Blazor-frontend als de ASP.NET Core-backend. [Hergebruik de autorisatielogica](https://learn.microsoft.com/en-us/aspnet/core/security/authorization/policies?view=aspnetcore-8.0).
+    - Olivier-challenge: men mag todo's verwijderen als die door hem-/haarzelf is aangemaakt.
+    - Olivier-extra-challenge: implementeer die autorisatie (verwijderen van todo) zowel in de Blazor-frontend als de ASP.NET Core-backend. [Hergebruik de autorisatielogica](https://learn.microsoft.com/en-us/aspnet/core/security/authorization/policies?view=aspnetcore-8.0).
