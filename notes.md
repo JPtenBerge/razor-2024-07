@@ -74,6 +74,16 @@ MPA - Multi Page Application
 - Kleurtjes in template vallen opeens weg?! Random reboot fix
 - Cursor niet zichtbaar bij extract interface
 
+### Handige
+
+- heeft een package manager console voor NuGet-commando's
+
+```sh
+dotnet ef migrations add Initial
+dotnet ef database update
+```
+Meer: https://learn.microsoft.com/en-us/ef/core/cli/dotnet
+
 ## Repositories
 
 - pattern
@@ -89,3 +99,64 @@ Zetten we in middels dependency injection
 - van buitenaf bepaal je de implementatie
 - een vorm van Inversion of Control (IoC)
 - niet meer zelf `new Bla()` doen
+
+## EF Core
+
+- ORM - Object-Relational Mapper
+  - JPA / Hibernate / OpenJPA / EclipseLink
+- Dapper
+
+Vroeger:
+```cs
+using (var connection = new SqlConnection())
+{
+	connection.Open();
+	using (var command = new SqlCommand(connection))
+	{
+		command.CommandText = "SELECT * FROM klant;";
+		command.CommandType = CommandType.Text;
+		using (var reader = command.ExecuteReader())
+		{
+			while (reader.Next())
+			{
+				var naam = reader["naam"];
+				var datum = DateTime.Parse(reader["date"]);
+			}
+		}
+	}
+}
+```
+```cs
+// EF Core
+var klanten = context.Klanten.ToList();
+```
+
+Benodigde packages:
+- `Microsoft.EntityFrameworkCore` voor abstracte classes
+  - `DbContext<T>`, `DbSet<T>`
+- `Microsoft.EntityFrameworkCore.Tools` voor commando's
+  - `Add-Migration Initial`
+  - `Script-Migration`
+  - `Update-Database`
+- een adapter richting jouw DBMS
+  - `Microsoft.EntityFrameworkCore.SqlServer`
+
+## `async`
+
+Synchrone I/O hoort eigenlijk niet:
+
+```php
+// PHP
+mysql_query($query);
+```
+```java
+// Java
+em.persist(obj);
+```
+```cs
+// .NET
+context.SaveChanges();
+```
+
+Een Thread is niet gratis, heeft een stack met al je lokale variabelen, is standaard 1MB
+- 15M x 15M threads x 15M 1MB stacks = 15.000GB geheugen
