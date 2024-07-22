@@ -1,4 +1,8 @@
+using DemoProject.Entities;
 using DemoProject.Repositories;
+using DemoProject.Validators;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +13,13 @@ var builder = WebApplication.CreateBuilder(args);
 // .Add...()
 
 builder.Services.AddRazorPages();
+
+builder.Services.AddScoped<IValidator<Car>, CarValidator>();
+builder.Services.AddFluentValidationAutoValidation(options =>
+{
+    options.DisableDataAnnotationsValidation = true;
+});
+
 
 // side effects.
 
