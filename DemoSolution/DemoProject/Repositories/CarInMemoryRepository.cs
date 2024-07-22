@@ -36,15 +36,15 @@ public class CarInMemoryRepository : ICarRepository
          }
     };
 
-    public IEnumerable<Car> GetAll()
+    public Task<IEnumerable<Car>> GetAllAsync()
     {
-        return _cars;
+        return Task.FromResult(_cars.AsEnumerable());
     }
 
-    public Car Add(Car newCar)
+    public Task<Car> AddAsync(Car newCar)
     {
         newCar.Id = _cars != null && _cars.Any() ? _cars.Max(x => x.Id) + 1 : 1;
         _cars.Add(newCar);
-        return newCar;
+        return Task.FromResult(newCar);
     }
 }

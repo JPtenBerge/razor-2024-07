@@ -1,5 +1,6 @@
 ﻿using DemoProject.DataAccess;
 using DemoProject.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DemoProject.Repositories;
 
@@ -11,15 +12,15 @@ public class CarDbRepository : ICarRepository
     {
         _context = context;
     }
-    public IEnumerable<Car> GetAll()
+    public async Task<IEnumerable<Car>> GetAllAsync()
     {
-        return _context.Cars.ToList();
+        return await _context.Cars.ToListAsync();
     }
 
-    public Car Add(Car newCar)
+    public async Task<Car> AddAsync(Car newCar)
     {
         _context.Cars.Add(newCar);
-        _context.SaveChanges(); // zet Id
+        await _context.SaveChangesAsync(); // zet Id
         return newCar; // updated entity
     }
 }

@@ -21,19 +21,19 @@ public class IndexModel : PageModel // bij ieder request wordt deze opnieuw gein
         _carRepository = carRepository;
     }
 
-    public void OnGet()
+    public async Task OnGet()
     {
-        Cars = _carRepository.GetAll().ToList();
+        Cars = (await _carRepository.GetAllAsync()).ToList();
     }
 
     // page handlers
 
-    public IActionResult OnPost() // model binding  reflection
+    public async Task<IActionResult> OnPost() // model binding  reflection
     {
         if (!ModelState.IsValid)
         {
             Console.WriteLine("dat is NIET valid");
-            Cars = _carRepository.GetAll().ToList();
+            Cars = (await _carRepository.GetAllAsync()).ToList();
             return Page();
         }
 
@@ -49,7 +49,7 @@ public class IndexModel : PageModel // bij ieder request wordt deze opnieuw gein
         // - PageResult
         // - RedirectToPageResult
 
-        _carRepository.Add(NewCar);
+        await _carRepository.AddAsync(NewCar);
         return RedirectToPage();
     }
 }

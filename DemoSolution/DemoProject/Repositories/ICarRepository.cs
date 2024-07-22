@@ -4,7 +4,7 @@ namespace DemoProject.Repositories
 {
     public interface ICarRepository
     {
-        Car Add(Car newCar);
-        IEnumerable<Car> GetAll();
+        Task<Car> AddAsync(Car newCar);
+        Task<IEnumerable<Car>> GetAllAsync();
     }
 }
