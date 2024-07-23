@@ -14,6 +14,8 @@ public class DemoContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        //modelBuilder.ApplyConfigurationsFromAssembly
+
         modelBuilder.Entity<Car>().Property(x => x.Make).HasMaxLength(50);
         modelBuilder.Entity<Car>().Property(x => x.Model).HasMaxLength(50);
         modelBuilder.Entity<Car>().Property(x => x.PhotoUrl).HasMaxLength(250);

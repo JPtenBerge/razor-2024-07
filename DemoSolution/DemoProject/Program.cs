@@ -16,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<DemoContext>(options =>
 {
-    options.UseSqlServer("Server=.\\SQLEXPRESS; Initial Catalog=demodb; Integrated Security=true; TrustServerCertificate=true");
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DemoContext"));
 }, ServiceLifetime.Transient);
 
 builder.Services.AddRazorPages();
