@@ -213,7 +213,7 @@ Minder waardevolle tests:
 - NUnit
 
 waarom MSTest vroeger wat minder was:
-- .NET Core 1.0 werkte dit niet
+- bij .NET Core 1.0 werkte het niet
 - data-driven tests / parameterized tests waren niet tof om op te zetten (zie [`[DataSource(...)]`](https://learn.microsoft.com/en-us/visualstudio/test/how-to-create-a-data-driven-unit-test?view=vs-2022))
 
 Mocking libraries:
@@ -233,4 +233,6 @@ Microsoft Fakes: handig voor testen van `static` zaken:
 - `DateTime.Now`
 Maar is enkel beschikbaar voor VS Enterprise (ook niet voor Rider)
 
-[FluentAssertions](https://fluentassertions.com/) zijn tof voor leesbaarheid bij de wat complexere assertions (collections, objects).
+Verder:
+- [FluentAssertions](https://fluentassertions.com/) zijn tof voor leesbaarheid bij de wat complexere assertions (collections, objects).
+- [Naamgevingsconventies](https://stackoverflow.com/questions/155436/unit-test-naming-best-practices)
