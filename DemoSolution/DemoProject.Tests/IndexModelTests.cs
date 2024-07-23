@@ -2,6 +2,8 @@ using DemoProject.Entities;
 using DemoProject.Pages;
 using DemoProject.Repositories;
 using FluentAssertions;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Moq;
 
 namespace DemoProject.Tests
@@ -16,6 +18,13 @@ namespace DemoProject.Tests
         Mock<ICarTypeRepository> _carTypeRepositoryMock = default!;
 
         IndexModel _sut = default!;
+
+        [ClassInitialize]
+        public void OneTimeInit()
+        {
+
+        }
+
 
         [TestInitialize]
         public void Init()
@@ -56,6 +65,37 @@ namespace DemoProject.Tests
             _carTypeRepositoryMock.Verify(x => x.GetAllAsync(), Times.Once());
             _sut.Cars.Should().BeEquivalentTo(_cars);
             _sut.CarTypes.Should().BeEquivalentTo(_carTypes);
+        }
+
+        [TestMethod]
+        public async Task OnPost_ValidModel_AddsUsingRepoAndRedirects()
+        {
+            // Arrange: dingen klaarzetten/voorbereiden
+
+            // Act: doen
+            var result = await _sut.OnPost();
+
+            // Assert: toetsen
+            _carRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Car>()), Times.Once());
+            _carRepositoryMock.Verify(x => x.GetAllAsync(), Times.Never());
+            _carTypeRepositoryMock.Verify(x => x.GetAllAsync(), Times.Never());
+            result.Should().BeOfType<RedirectToPageResult>();
+        }
+
+        [TestMethod]
+        public async Task OnPost_InvalidModel_NotAddUsingRepoAndReturnsPageWithValidationErrors()
+        {
+            // Arrange: dingen klaarzetten/voorbereiden
+            _sut.ModelState.AddModelError("q", "w");
+
+            // Act: doen
+            var result = await _sut.OnPost();
+
+            // Assert: toetsen
+            _carRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Car>()), Times.Never());
+            _carRepositoryMock.Verify(x => x.GetAllAsync(), Times.Once());
+            _carTypeRepositoryMock.Verify(x => x.GetAllAsync(), Times.Once());
+            result.Should().BeOfType<PageResult>();
         }
     }
 

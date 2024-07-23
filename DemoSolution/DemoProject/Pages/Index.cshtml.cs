@@ -35,30 +35,16 @@ public class IndexModel : PageModel // bij ieder request wordt deze opnieuw gein
 
     public async Task<IActionResult> OnPost() // model binding  reflection
     {
-        // over-POSTing
-
         if (!ModelState.IsValid)
         {
             Console.WriteLine("dat is NIET valid");
             Cars = (await _carRepository.GetAllAsync()).ToList();
+            CarTypes = (await _carTypeRepository.GetAllAsync()).ToList();
             return Page();
         }
-
-        // action results:
-        // - OkResult
-        // - BadRequestResult
-        // - NotFoundResult
-        // - CreatedResult
-        // - ContentResult
-        // - JsonResult
-        // - FileResult
-        // - allerlei redirect
-        // - PageResult
-        // - RedirectToPageResult
-
-        
 
         await _carRepository.AddAsync(NewCar);
         return RedirectToPage();
     }
 }
+
