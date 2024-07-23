@@ -74,6 +74,7 @@ MPA - Multi Page Application
 - Kleurtjes in template vallen opeens weg?! Random reboot fix
 - Cursor niet zichtbaar bij extract interface
 - Migrations adden geeft build error maar Visual Studio laat niks zien
+- Crasht bij project references
 
 ### EF Core-commando's voor wanneer je geen Package Manager Console hebt
 
