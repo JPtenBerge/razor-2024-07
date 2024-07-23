@@ -231,8 +231,9 @@ A.Fake<I...>();
 Microsoft Fakes: handig voor testen van `static` zaken:
 - `File.AppendAllText()`
 - `DateTime.Now`
+
 Maar is enkel beschikbaar voor VS Enterprise (ook niet voor Rider)
 
 Verder:
 - [FluentAssertions](https://fluentassertions.com/) zijn tof voor leesbaarheid bij de wat complexere assertions (collections, objects).
-- [Naamgevingsconventies](https://stackoverflow.com/questions/155436/unit-test-naming-best-practices)
+- Naamgevingsconventies: [interessante discussie op StackOverflow](https://stackoverflow.com/questions/155436/unit-test-naming-best-practices) en [wat Microsoft vindt](https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices)
