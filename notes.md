@@ -73,10 +73,9 @@ MPA - Multi Page Application
 - Runconfiguraties voor meerdere projecten opstarten binnen solution
 - Kleurtjes in template vallen opeens weg?! Random reboot fix
 - Cursor niet zichtbaar bij extract interface
+- Migrations adden geeft build error maar Visual Studio laat niks zien
 
-### Handige
-
-- heeft een package manager console voor NuGet-commando's
+### EF Core-commando's voor wanneer je geen Package Manager Console hebt
 
 ```sh
 dotnet ef migrations add Initial
