@@ -1,5 +1,6 @@
 using DemoProject.DataAccess;
 using DemoProject.Entities;
+using DemoProject.Middleware;
 using DemoProject.Repositories;
 using DemoProject.Validators;
 using FluentValidation;
@@ -32,6 +33,7 @@ builder.Services.AddFluentValidationAutoValidation(options =>
 //builder.Services.AddSingleton<ICarRepository, CarInMemoryRepository>(); // elke keer een nieuwe
 builder.Services.AddTransient<ICarRepository, CarDbRepository>(); // elke keer een nieuwe
 builder.Services.AddTransient<ICarTypeRepository, CarTypeDbRepository>(); // elke keer een nieuwe
+builder.Services.AddSingleton<ExceptionLoggingMiddleware>();
 
 //builder.Services.AddScoped // elk request een nieuwe
 //builder.Services.AddSingleton // 1 instance to rule them all (zolang je app leeft)
@@ -40,7 +42,16 @@ var app = builder.Build();
 
 // dit is wat er voor ieder request moet gebeuren
 
-// middleware
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+
+app
+    .UseStaticFiles()
+    .UseExceptionLoggingMiddleware();
+
+// middleware <==
 // .Use...()
 // .Map...()
 app.MapRazorPages(); // /Home => /Pages/Home.cshtml
