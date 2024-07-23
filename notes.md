@@ -105,6 +105,7 @@ Zetten we in middels dependency injection
 - ORM - Object-Relational Mapper
   - JPA / Hibernate / OpenJPA / EclipseLink
 - Dapper
+- Connectionstrings: https://www.connectionstrings.com/
 
 Vroeger:
 ```cs
@@ -160,3 +161,13 @@ context.SaveChanges();
 
 Een Thread is niet gratis, heeft een stack met al je lokale variabelen, is standaard 1MB
 - 15M x 15M threads x 15M 1MB stacks = 15.000GB geheugen
+
+## JP's default lijstje van dingen om op te letten bij schrijven van code
+
+1. leesbaarheid
+2. onderhoudbaarheid
+3. testbaarheid
+4. niet-hackbaarheid
+5. dat het werkt
+6. performance
+
