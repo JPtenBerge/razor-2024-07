@@ -171,3 +171,66 @@ Een Thread is niet gratis, heeft een stack met al je lokale variabelen, is stand
 5. dat het werkt
 6. performance
 
+## Unittesten
+
+unittests
+- hier spreek jij je code aan
+- een zo klein mogelijk stukje code aanspreken
+
+integratietests
+- interactie tussen verschillende componenten/classes/onderdelen
+- verschillende systemen
+- database betrekt
+- gerenderde HTML
+- hier spreek jij je code aan
+- API-calls
+
+end-to-end-tests / UI testing
+- alle lagen
+- database KAN hier nog wel gemockt worden
+- hier spreek je NIET je code aan
+  - browser geautomatiseerd aan het aansturen
+
+En meer: component A/B testing smoke spec manual (menselijke tester)
+
+Minder waardevolle tests:
+
+- getters/setters/constructors testen
+  - diehard logica is interessant om te testen, niet hele basale toekenning-shizzle
+    - `if` `while` `for` berekeningen `Math.Max()`
+- repositories
+  - diehard logica is interessant om te testen
+- wanneer je niet zelf je tests schrijft
+  - je hoort ze niet te laten schrijven door een collega/stagiair
+  - gegeneerde tests
+- als jouw project < 6 maanden duurt
+  - unittests zijn voor de lange termijn
+    >niets is zo permanent als een tijdelijke oplossing
+
+.NET testframeworks:
+- MSTest    <== happy path Microsoft
+- xUnit
+- NUnit
+
+waarom MSTest vroeger wat minder was:
+- .NET Core 1.0 werkte dit niet
+- data-driven tests / parameterized tests waren niet tof om op te zetten (zie [`[DataSource(...)]`](https://learn.microsoft.com/en-us/visualstudio/test/how-to-create-a-data-driven-unit-test?view=vs-2022))
+
+Mocking libraries:
+- NSubstitute
+- Moq
+- FakeItEasy
+
+Verschil zit grotendeels in syntax:
+
+```cs
+new Mock<I...>();
+A.Fake<I...>();
+```
+
+Microsoft Fakes: handig voor testen van `static` zaken:
+- `File.AppendAllText()`
+- `DateTime.Now`
+Maar is enkel beschikbaar voor VS Enterprise (ook niet voor Rider)
+
+[FluentAssertions](https://fluentassertions.com/) zijn tof voor leesbaarheid bij de wat complexere assertions (collections, objects).
