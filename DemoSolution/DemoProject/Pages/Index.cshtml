@@ -33,6 +33,11 @@
             </li>
             <li>
                 <label for="input-year">Year of build:</label>
+                <select id="input-year" asp-for="NewCar.TypeId" asp-items="@(new SelectList(Model.CarTypes, "Id", "Name"))"></select>
+                <span asp-validation-for="NewCar.TypeId"></span>
+            </li>
+            <li>
+                <label for="input-year">Year of build:</label>
                 <input id="input-year" asp-for="NewCar.Year" />
                 <span asp-validation-for="NewCar.Year"></span>
             </li>
@@ -62,6 +67,7 @@
             <tr>
                 <th>Make</th>
                 <th>Model</th>
+                <th>Type</th>
                 <th>Year of build</th>
                 <th>Photo</th>
             </tr>
@@ -72,6 +78,7 @@
                 <tr class="@(car.Year < 2000 ? "oud" : "")">
                     <td>@car.Make</td>
                     <td>@car.Model</td>
+                    <td>@car.Type.Name</td>
                     <td>@car.Year</td>
                     <td><img src="@car.PhotoUrl"></td>
                 </tr>

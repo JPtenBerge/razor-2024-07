@@ -31,6 +31,7 @@ builder.Services.AddFluentValidationAutoValidation(options =>
 
 //builder.Services.AddSingleton<ICarRepository, CarInMemoryRepository>(); // elke keer een nieuwe
 builder.Services.AddTransient<ICarRepository, CarDbRepository>(); // elke keer een nieuwe
+builder.Services.AddTransient<ICarTypeRepository, CarTypeDbRepository>(); // elke keer een nieuwe
 
 //builder.Services.AddScoped // elk request een nieuwe
 //builder.Services.AddSingleton // 1 instance to rule them all (zolang je app leeft)

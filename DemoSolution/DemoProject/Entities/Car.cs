@@ -16,4 +16,8 @@ public class Car
     public required int Year { get; set; }
 
     public required string PhotoUrl { get; set; }
+
+    public required CarType Type { get; set; } // gebruik ik voor display purposes
+
+    public required int TypeId { get; set; } // gebruik ik voor het toevoegen/wijzigen
 }
