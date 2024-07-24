@@ -75,6 +75,7 @@ MPA - Multi Page Application
 - Cursor niet zichtbaar bij extract interface
 - Migrations adden geeft build error maar Visual Studio laat niks zien
 - Crasht bij project references
+- `.csproj` die opeens gekke remove content files enzo bevat
 
 ### EF Core-commando's voor wanneer je geen Package Manager Console hebt
 
