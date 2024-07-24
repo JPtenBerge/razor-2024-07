@@ -1,4 +1,5 @@
-﻿using DemoProject.Entities;
+﻿using DemoProject.Dtos;
+using DemoProject.Entities;
 using DemoProject.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,16 +17,15 @@ public class CarController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IEnumerable<Car>> GetAll()
+    public async Task<CarGetAllResponseDto> GetAll(CarGetAllRequestDto dto)
     {
-        return await _carRepository.GetAllAsync();
+        var cars = await _carRepository.GetAllAsync();
+        return new() { Cars = cars.Select(c => c.ToDto()) }; // mapping car entities => car dtos
     }
 
     [HttpGet("{id:min(1)}")]
     public async Task<ActionResult<Car>> Get(int id)
     {
-
-
         var car = await _carRepository.GetAsync(id);
         return car != null ? car : NotFound($"ID {id} does not exist");
     }
