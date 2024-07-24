@@ -24,6 +24,8 @@ public class CarController : ControllerBase
     [HttpGet("{id:min(1)}")]
     public async Task<ActionResult<Car>> Get(int id)
     {
+
+
         var car = await _carRepository.GetAsync(id);
         return car != null ? car : NotFound($"ID {id} does not exist");
     }
@@ -32,6 +34,6 @@ public class CarController : ControllerBase
     public async Task<ActionResult<Car>> Post(Car newCar)
     {
         await _carRepository.AddAsync(newCar);
-        return Created($"/api/car/{newCar.Id}", newCar);
+        return CreatedAtAction(nameof(Get), new { id = newCar.Id }, newCar);
     }
 }
