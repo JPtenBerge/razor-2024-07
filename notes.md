@@ -259,3 +259,137 @@ google.be?q=Hoe kan ik...
 ```
 
 AJAX - Asynchronous JavaScript And JSON
+
+## REST
+
+- REpresentational State Transfer (2000/1)
+- representational: het formaat
+  - JSON
+  - XML
+  - ...
+  - wordt bepaald met een HTTP-header 
+    - wat jij terug wil krijgen: `Accept: text/html; application/json; application/xml; ...`
+    - wat jij opstuurt: `Content-Type: ...`
+
+REST is gebaseerd op conventions met:
+- HTTP methods/verbs
+- statuscodes 
+
+HTTP methods/verbs
+- GET    ophalen
+- POST   aanmaken                                /vervangen
+- PUT    vervangen (de gehele entiteit)          /aanmaken
+- PATCH  deel updaten
+- DELETE verwijderen
+
+```sh
+POST  /api/car  { make: '...', model: '...', ... }
+POST  /api/car  { make: '...', model: '...', ... }
+POST  /api/car  { make: '...', model: '...', ... }
+```
+```sh
+PUT  /api/car/161  { make: '...', model: '...', ... }
+PUT  /api/car/161  { make: '...', model: '...', ... }
+PUT  /api/car/161  { make: '...', model: '...', ... }
+```
+
+Het resultaat van deze requests, of er 1 of meerdere cars zijn toegevoegd, wordt ook wel de idempotency van een request genoemd.
+
+
+alternatieven op REST:
+- GraphQL <== opzetten. uitdrukkingsvrijheid.
+- gRPC <== opzetten. uitdrukkingsvrijheid.
+- SOAP <== XML. tooling. uitdrukkingsvrijheid.
+
+API testing tools:
+- Postman  <== UI druk. het duurde heel lang voordat ze dark mode hadden. paywall.
+- Insomnia  <== dark mode out of the box. sinds vorig jaar KONG   paywall.
+- Bruno
+- HoppScotch
+- VS Code-extensies
+  - REST client  .http/.rest
+  - Thunder Client
+
+Wat vindt JP nou echt LASTIG met REST APIs? => versionering.
+
+Niet zozeer de endpoints technisch versionen:
+```sh
+api/v1/todo
+api/todo?v=1
+api/todo  X-API-VERSION: 1  custom HTTP header
+```
+
+Maar alles achter die endpoints, al je entiteiten, services, repositories, database, om van daaruit rekening houden met de verschillende vormen van de data die je terug gaat geven.
+
+### HTTP-statuscodes
+
+- 2xx - SUCCESS
+  - 200 OK
+  - 201 Created
+  - 204 No Content   DELETE
+- 3xx - REDIRECT
+  - 301/302 Permanent/temporary  POST/Redirect/GET
+  - 307/308 Permanent/temporary met behoud van de verb
+- 4xx - CLIENT ERROR
+  - 400 Bad Request  syntax error  jij als client moet eerst je request aanpassen en daarna mag je het weer proberen
+  - 401 Unauthorized
+  - 403 Forbidden
+  - 404 Not Found
+  - 405 Method Not Allowed   POST => endpoint die geen POST kan verwerken
+  - 415 MediaType not supported   XML => endpoint die geen XML kan parsen
+  - 418 I'm a teapot
+  - 409 Conflict
+  - 422 Unprocessable entity
+- 5xx - SERVER ERROR
+  - 500 Internal Server Error
+  - 502 Bad Gateway
+
+### REST maturity levels
+
+- Zie ook https://martinfowler.com/articles/richardsonMaturityModel.html
+- HATEOAS: Hypermedia As The Engine Of Application State
+- level 3 hypermedia
+- wanneer gebruiken? vooral bij openbare APIs die veel gebruikers heeft/groot zijn
+
+Voorbeeldresponse van `api/car/16`:
+
+```json
+{
+	"make": ...
+	"model": ...
+	"links": [
+		{ "description": "history", "rel": "api/car/16/maintenance-history" },
+		{ "description": "...", "rel": "..." },
+		{ "description": "...", "rel": "..." },
+		{ "description": "...", "rel": "..." },
+	]
+}
+```
+
+### Circulaire referenties
+
+- `[JsonIgnore]` - kan niet per API worden ingesteld
+- alles handmatig op null in te stellen - heel lelijk
+- configuratie
+- configuratie
+- DTOs
+
+DTOs bieden iets meer flexibiliteit doordat je wel velden kan toevoegen:
+
+```json
+{
+	"done": true
+}
+```
+=>
+```json
+{
+	"done": true,
+	"date": "2024-04-95"
+}
+```
+
+## Overig
+
+- [Async Guidance](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#prefer-asyncawait-over-directly-returning-task) - waarom niet gewoon de `Task` returnen zonder `await`?
+
