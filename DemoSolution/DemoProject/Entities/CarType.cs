@@ -1,4 +1,6 @@
-﻿namespace DemoProject.Entities;
+﻿using System.Text.Json.Serialization;
+
+namespace DemoProject.Entities;
 
 public class CarType
 {
@@ -6,5 +8,6 @@ public class CarType
 
     public required string Name { get; set; }
 
-    public required IEnumerable<Car> Cars { get; set; }
+    [JsonIgnore]
+    public IEnumerable<Car> Cars { get; set; }
 }

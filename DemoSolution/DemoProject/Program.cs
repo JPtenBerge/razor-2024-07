@@ -21,6 +21,7 @@ builder.Services.AddDbContext<DemoContext>(options =>
 }, ServiceLifetime.Transient);
 
 builder.Services.AddRazorPages();
+builder.Services.AddControllers();
 
 builder.Services.AddScoped<IValidator<Car>, CarValidator>();
 builder.Services.AddFluentValidationAutoValidation(options =>
@@ -34,6 +35,7 @@ builder.Services.AddFluentValidationAutoValidation(options =>
 builder.Services.AddTransient<ICarRepository, CarDbRepository>(); // elke keer een nieuwe
 builder.Services.AddTransient<ICarTypeRepository, CarTypeDbRepository>(); // elke keer een nieuwe
 builder.Services.AddSingleton<ExceptionLoggingMiddleware>();
+builder.Services.AddProblemDetails();
 
 //builder.Services.AddScoped // elk request een nieuwe
 //builder.Services.AddSingleton // 1 instance to rule them all (zolang je app leeft)
@@ -54,6 +56,7 @@ app
 // middleware <==
 // .Use...()
 // .Map...()
+app.MapControllers(); // doorzoekt mijn project naar controllers   : ControllerBase  Controllers/  [ApiController]
 app.MapRazorPages(); // /Home => /Pages/Home.cshtml
 
 app.Run();

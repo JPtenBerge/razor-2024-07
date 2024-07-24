@@ -12,6 +12,12 @@ public class CarDbRepository : ICarRepository
     {
         _context = context;
     }
+
+    public async Task<Car?> GetAsync(int id)
+    {
+        return await _context.Cars.Include(x => x.Type).SingleOrDefaultAsync(x => x.Id == id);
+    }
+
     public async Task<IEnumerable<Car>> GetAllAsync()
     {
         return await _context.Cars.Include(x => x.Type).ToListAsync();
@@ -23,5 +29,12 @@ public class CarDbRepository : ICarRepository
 
         await _context.SaveChangesAsync(); // zet Id
         return newCar; // updated entity
+    }
+
+
+
+    public async Task<bool> ExistsAsync(int id)
+    {
+        throw new NotImplementedException();
     }
 }
