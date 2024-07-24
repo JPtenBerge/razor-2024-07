@@ -1,0 +1,14 @@
+﻿@model int
+
+@if (Model < 1960)
+{
+    <text>Klassieker</text>
+}
+else if (Model >= 1960 && Model < 1990)
+{
+    <text>Oud barrel</text>
+}
+else
+{
+    <text>Hippe bak</text>
+}

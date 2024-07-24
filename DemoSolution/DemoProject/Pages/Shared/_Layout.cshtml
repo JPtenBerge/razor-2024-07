@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>@RenderSection("title") - beste webapp aller tijden</title>
+    @RenderSection("css", false)
+    @RenderSection("scripts", false)
+</head>
+
+<body>
+    <header>
+        Beste demoapp aller tijden
+
+        <nav>
+            <ol>
+                <li><a href="/">Cars</a></li>
+                <li><a href="/tweede">Tweede</a></li>
+                <li><a href="/cardetails/bla">Cardetails/bla</a></li>
+                <li><a href="/cardetails/bla?hoi=iets&wat=dus">Cardetails/bla?hoi=iets&wat=dus</a></li>
+            </ol>
+        </nav>
+    </header>
+
+    @RenderBody()
+
+    <footer>&copy; JP 2k24</footer>
+</body>
+</html>

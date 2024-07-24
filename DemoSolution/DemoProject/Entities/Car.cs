@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace DemoProject.Entities;
 
@@ -19,5 +20,6 @@ public class Car
 
     public required CarType Type { get; set; } // gebruik ik voor display purposes
 
+    [DisplayName("Type hier")]
     public required int TypeId { get; set; } // gebruik ik voor het toevoegen/wijzigen
 }

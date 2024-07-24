@@ -1,10 +1,13 @@
 ﻿@page
-@using DemoProject.Pages
-@model DemoProject.Pages.IndexModel
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model IndexModel
 
+@section title { Cars }
 
-<link rel="stylesheet" href="bla.css" />
+@section css {
+    <link rel="stylesheet" href="bla.css" />
+}
+
+<h1>Cars</h1>
 
 <div class="flex">
     <form method="post">
@@ -20,8 +23,8 @@
                 <span asp-validation-for="NewCar.Model"></span>
             </li>
             <li>
-                <label for="input-year">Year of build:</label>
-                <select id="input-year" asp-for="NewCar.TypeId" asp-items="@(new SelectList(Model.CarTypes, "Id", "Name"))"></select>
+                <label asp-for="NewCar.TypeId"></label>
+                <select id="input-type" asp-for="NewCar.TypeId" asp-items="@(new SelectList(Model.CarTypes, "Id", "Name"))"></select>
                 <span asp-validation-for="NewCar.TypeId"></span>
             </li>
             <li>
@@ -67,7 +70,7 @@
                     <td>@car.Make</td>
                     <td>@car.Model</td>
                     <td>@car.Type.Name</td>
-                    <td>@car.Year</td>
+                    <td><partial name="_OldCarDescriptor" model="car.Year" /></td>
                     <td><img src="@car.PhotoUrl"></td>
                 </tr>
             }
