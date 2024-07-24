@@ -238,3 +238,24 @@ Maar is enkel beschikbaar voor VS Enterprise (ook niet voor Rider)
 Verder:
 - [FluentAssertions](https://fluentassertions.com/) zijn tof voor leesbaarheid bij de wat complexere assertions (collections, objects).
 - Naamgevingsconventies: [interessante discussie op StackOverflow](https://stackoverflow.com/questions/155436/unit-test-naming-best-practices) en [wat Microsoft vindt](https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices)
+
+## Routes en querystrings
+
+Dingen verwijderen: GET of POST
+
+```sh
+GET index.php?action=delete_customer&id=14
+```
+```sh
+/details/14?sort=make&page=5   <=== zoekmachines vinden deze fijner
+/details?id=14
+```
+```sh
+google.be?q=Hoe kan ik...
+```
+```sh
+/index.php?page=contact   <== dit vinden zoekmachines helemaal niks
+/index.php?pageId=475874
+```
+
+AJAX - Asynchronous JavaScript And JSON
