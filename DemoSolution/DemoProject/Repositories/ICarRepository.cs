@@ -8,6 +8,7 @@ namespace DemoProject.Repositories
         Task<IEnumerable<Car>> GetAllAsync();
         Task<Car?> GetAsync(int id);
 
+        Task<Car> UpdatePhotoAsync(int id, string photoUrl);
         Task<bool> ExistsAsync(int id);
 
     }

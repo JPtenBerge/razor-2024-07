@@ -31,10 +31,20 @@ public class CarDbRepository : ICarRepository
         return newCar; // updated entity
     }
 
+    public async Task<Car> UpdatePhotoAsync(int id, string photoUrl)
+    {
+        //await _context.Cars
+        //    .Where(x => x.Id == id)
+        //    .ExecuteUpdateAsync(setters => setters.SetProperty(x => x.PhotoUrl, photoUrl));
 
+        var entity = await _context.Cars.Include(x => x.Type).SingleAsync(x => x.Id == id);
+        entity.PhotoUrl = photoUrl;
+        await _context.SaveChangesAsync();
+        return entity;
+    }
 
     public async Task<bool> ExistsAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _context.Cars.AnyAsync(x => x.Id == id);
     }
 }

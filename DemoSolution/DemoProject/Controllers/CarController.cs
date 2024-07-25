@@ -36,4 +36,16 @@ public class CarController : ControllerBase
         await _carRepository.AddAsync(newCar);
         return CreatedAtAction(nameof(Get), new { id = newCar.Id }, newCar);
     }
+
+    [HttpPatch("{id:int}")]
+    public async Task<ActionResult<CarPatchResponseDto>> Patch(int id, CarPatchRequestDto dto)
+    {
+        if (!await _carRepository.ExistsAsync(id))
+        {
+            return NotFound($"ID {id} was not found");
+        }
+
+        var updatedCar = await _carRepository.UpdatePhotoAsync(id, dto.PhotoUrl);
+        return new CarPatchResponseDto(UpdatedCar: updatedCar.ToDto());
+    }
 }
