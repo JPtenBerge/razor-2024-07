@@ -1,0 +1,36 @@
+﻿@page "/poll"
+@using System.Text.Json
+
+<h3>Poll</h3>
+
+@if (ActivePoll != null)
+{
+    <h2>@ActivePoll.Statement</h2>
+    <ol>
+        @foreach(var option in ActivePoll.Options)
+        {
+            <li>@option.Text</li>
+        }
+    </ol>
+}
+
+
+<form @onsubmit="InitPoll">
+
+    <input @bind-value="NewPoll.Statement" />
+
+    <ol>
+        @for(var i = 0; i < NewPoll.Options.Count; i++)
+        {
+            var option = NewPoll.Options[i];
+            <li>
+                <label>Optie #@(i + 1):</label>
+                <input @bind-value="option.Text" />
+            </li>
+        }
+    </ol>
+    <pre>@JsonSerializer.Serialize(NewPoll)</pre>
+
+    <button>Zet poll uit</button>
+
+</form>

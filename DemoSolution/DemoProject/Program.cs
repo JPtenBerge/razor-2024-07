@@ -7,6 +7,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using DemoProject.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,8 @@ var builder = WebApplication.CreateBuilder(args);
 // dependency injection
 
 // .Add...()
+
+builder.Services.AddSignalR();
 
 builder.Services.AddDbContext<DemoContext>(options =>
 {
@@ -71,6 +74,7 @@ app
 // middleware <==
 // .Use...()
 // .Map...()
+app.MapHub<PollHub>("/pollHub");
 app.MapControllers(); // doorzoekt mijn project naar controllers   : ControllerBase  Controllers/  [ApiController]
 app.MapRazorPages(); // /Home => /Pages/Home.cshtml
 
