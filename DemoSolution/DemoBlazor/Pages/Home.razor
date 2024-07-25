@@ -1,0 +1,41 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<h1>Cars</h1>
+
+Name: @Name
+
+<button @onclick="ChangeName">Change name</button>
+
+<div class="flex">
+    @if (Cars == null || !Cars.Any())
+    {
+        <p>Geen auto's vandaag.</p>
+        return;
+    }
+
+    <table>
+        <thead>
+            <tr>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Type</th>
+                <th>Year of build</th>
+                <th>Photo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var car in Cars)
+            {
+                <tr class="@(car.Year < 2000 ? "oud" : "")">
+                    <td>@car.Make</td>
+                    <td>@car.Model</td>
+                    <td>@car.Type?.Name</td>
+                    <td><partial name="_OldCarDescriptor" model="car.Year" /></td>
+                    <td><img src="@car.PhotoUrl"></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

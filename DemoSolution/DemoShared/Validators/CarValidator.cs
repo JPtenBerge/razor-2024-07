@@ -1,7 +1,7 @@
-﻿using DemoProject.Entities;
+﻿using DemoShared.Entities;
 using FluentValidation;
 
-namespace DemoProject.Validators;
+namespace DemoShared.Validators;
 
 public class CarValidator : AbstractValidator<Car>
 {

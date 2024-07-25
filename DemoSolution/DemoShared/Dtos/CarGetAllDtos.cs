@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.Numerics;
-using DemoProject.Entities;
+using DemoShared.Entities;
 
-namespace DemoProject.Dtos;
+namespace DemoShared.Dtos;
 
 public record CarDto(int Id, string Make, string Model, int Year, string PhotoUrl, string Type);
 

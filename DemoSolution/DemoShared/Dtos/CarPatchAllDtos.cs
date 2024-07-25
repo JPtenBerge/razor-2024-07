@@ -1,4 +1,4 @@
-﻿namespace DemoProject.Dtos;
+﻿namespace DemoShared.Dtos;
 
 public record CarPatchRequestDto(string PhotoUrl);
 

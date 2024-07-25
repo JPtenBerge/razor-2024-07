@@ -1,4 +1,4 @@
-﻿namespace DemoProject.Entities;
+﻿namespace DemoShared.Entities;
 
 public class Actor
 {

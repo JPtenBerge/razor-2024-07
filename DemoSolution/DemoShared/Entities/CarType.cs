@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace DemoProject.Entities;
+namespace DemoShared.Entities;
 
 public class CarType
 {

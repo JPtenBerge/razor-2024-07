@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace DemoProject.Entities;
+namespace DemoShared.Entities;
 
 public class Car
 {
@@ -18,8 +18,8 @@ public class Car
 
     public required string PhotoUrl { get; set; }
 
-    public required CarType Type { get; set; } // gebruik ik voor display purposes
+    public CarType Type { get; set; } // gebruik ik voor display purposes
 
     [DisplayName("Type hier")]
-    public required int TypeId { get; set; } // gebruik ik voor het toevoegen/wijzigen
+    public int TypeId { get; set; } // gebruik ik voor het toevoegen/wijzigen
 }

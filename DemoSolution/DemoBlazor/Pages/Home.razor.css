@@ -1,0 +1,12 @@
+﻿td img {
+    max-width: 200px;
+}
+
+.oud {
+    background: lightgoldenrodyellow;
+}
+
+.flex {
+    display: flex;
+    gap: 1rem;
+}
