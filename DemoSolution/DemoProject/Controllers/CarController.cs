@@ -17,7 +17,7 @@ public class CarController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<CarGetAllResponseDto> GetAll(CarGetAllRequestDto dto)
+    public async Task<CarGetAllResponseDto> GetAll()
     {
         var cars = await _carRepository.GetAllAsync();
         return new() { Cars = cars.Select(c => c.ToDto()) }; // mapping car entities => car dtos

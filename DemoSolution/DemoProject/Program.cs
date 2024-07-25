@@ -21,6 +21,14 @@ builder.Services.AddDbContext<DemoContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DemoContext"));
 }, ServiceLifetime.Transient);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("blazorfrontend", policy =>
+    {
+        policy.WithOrigins("https://localhost:7155").AllowAnyHeader().AllowCredentials().AllowAnyMethod();
+    });
+});
+
 builder.Services.AddRazorPages();
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
@@ -53,6 +61,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
+
+app.UseCors("blazorfrontend");
 
 app
     .UseStaticFiles()

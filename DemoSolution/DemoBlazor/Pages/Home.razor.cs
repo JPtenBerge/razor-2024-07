@@ -1,4 +1,8 @@
-﻿using DemoShared.Entities;
+﻿using DemoShared.Dtos;
+using DemoShared.Entities;
+using Flurl.Http;
+using Microsoft.AspNetCore.Components;
+using System.Net.Http.Json;
 
 namespace DemoBlazor.Pages;
 
@@ -34,9 +38,34 @@ public partial class Home
          }
     };
 
+    //[Inject] public HttpClient Http { get; set; }
 
-    void ChangeName()
+    async Task ChangeName()
     {
         Name += " Jef";
+
+
+        var request = new CarPatchRequestDto(PhotoUrl: "iets anders");
+        var dto = await "https://localhost:7054/api/car/14".PatchJsonAsync(request).ReceiveJson<CarPatchResponseDto>();
+        Console.WriteLine($"dto: {dto.UpdatedCar.PhotoUrl}");
+
+        //Cars = dto.Cars.Select(x => x.ToEntity()).ToList();
+
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var request = new CarGetAllRequestDto();
+
+        //var dto = await "https://localhost:7054/api/car".SendJsonAsync(HttpMethod.Get, request).ReceiveJson<CarGetAllResponseDto>();
+
+        var dto = await "https://localhost:7054/api/car".GetJsonAsync<CarGetAllResponseDto>();
+        Cars = dto.Cars.Select(x => x.ToEntity()).ToList();
+
+        //var result = await Http.GetFromJsonAsync<IEnumerable<CarDto>>("api/car");
+
+        //var result2 = await Http.PostAsJsonAsync<IEnumerable<string>>("api/car", [ "bla", "hoi" ]);
+        //result2.Content.ReadFromJsonAsync<CarDto>();
+
     }
 }

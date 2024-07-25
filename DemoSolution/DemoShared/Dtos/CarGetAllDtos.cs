@@ -31,4 +31,16 @@ public static class CarGetAllExtensions
             Type: car.Type.Name
         );
     }
+
+    public static Car ToEntity(this CarDto car)
+    {
+        return new()
+        {
+            Id = car.Id,
+            Make = car.Make,
+            Model = car.Model,
+            Year = car.Year,
+            PhotoUrl = car.PhotoUrl
+        };
+    }
 }
