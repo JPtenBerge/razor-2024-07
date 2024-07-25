@@ -1,8 +1,8 @@
 using DemoProject.DataAccess;
-using DemoProject.Entities;
+using DemoShared.Entities;
 using DemoProject.Middleware;
 using DemoProject.Repositories;
-using DemoProject.Validators;
+using DemoShared.Validators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;

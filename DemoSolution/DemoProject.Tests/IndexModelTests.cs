@@ -1,4 +1,4 @@
-using DemoProject.Entities;
+using DemoShared.Entities;
 using DemoProject.Pages;
 using DemoProject.Repositories;
 using FluentAssertions;

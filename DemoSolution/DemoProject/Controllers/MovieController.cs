@@ -1,4 +1,4 @@
-﻿using DemoProject.Entities;
+﻿using DemoShared.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DemoProject.Controllers;

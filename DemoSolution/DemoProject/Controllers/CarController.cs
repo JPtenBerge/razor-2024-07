@@ -1,5 +1,5 @@
-﻿using DemoProject.Dtos;
-using DemoProject.Entities;
+﻿using DemoShared.Dtos;
+using DemoShared.Entities;
 using DemoProject.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
