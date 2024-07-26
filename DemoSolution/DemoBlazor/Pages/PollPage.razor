@@ -5,11 +5,27 @@
 
 @if (ActivePoll != null)
 {
+    var highestNrOfVotes = ActivePoll.Options.Max(x => x.NrOfVotes);
+
     <h2>@ActivePoll.Statement (@ActivePoll.TotalNrOfVotes)</h2>
-    <ol>
-        @foreach(var option in ActivePoll.Options)
+    <ol class="votes">
+        @foreach (var option in ActivePoll.Options)
         {
-            <li @onclick="() => Vote(option)">@option.Text (@option.NrOfVotes)</li>
+            var width = 0.0;
+
+            if (option.NrOfVotes > 0)
+            {
+                var maxWidth = 300.0;
+                var nrOfVotes = option.NrOfVotes * 1.0;
+                var percentage = nrOfVotes / highestNrOfVotes * 100.0;
+                width = maxWidth / 100.0 * percentage;
+            }
+
+            <li @onclick="() => Vote(option)">
+                <span class="description">@option.Text</span>
+                <div class="bar" style="width: @(width.ToString().Replace(",", "."))px;"></div>
+                <span>(@option.NrOfVotes)</span>
+            </li>
         }
     </ol>
 }
@@ -20,7 +36,7 @@
     <input @bind-value="NewPoll.Statement" />
 
     <ol>
-        @for(var i = 0; i < NewPoll.Options.Count; i++)
+        @for (var i = 0; i < NewPoll.Options.Count; i++)
         {
             var option = NewPoll.Options[i];
             <li>

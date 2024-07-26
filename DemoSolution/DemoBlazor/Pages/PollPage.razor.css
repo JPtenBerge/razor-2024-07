@@ -1,0 +1,16 @@
+﻿
+.votes li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+    .votes li .description {
+        display: block;
+        width: 150px;
+    }
+
+    .votes li .bar {
+        height: 4px;
+        background: lightblue;
+    }

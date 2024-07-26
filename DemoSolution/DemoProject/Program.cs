@@ -33,6 +33,8 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddRazorPages();
+
+
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     //options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
