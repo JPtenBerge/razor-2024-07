@@ -8,6 +8,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using DemoProject.Hubs;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSignalR();
 
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<DemoContext>();
+
 builder.Services.AddDbContext<DemoContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DemoContext"));
@@ -28,7 +31,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("blazorfrontend", policy =>
     {
-        policy.WithOrigins("https://localhost:7155").AllowAnyHeader().AllowCredentials().AllowAnyMethod();
+        policy.WithOrigins("https://localhost:7155").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
     });
 });
 
@@ -68,6 +71,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("blazorfrontend");
+
+app.UseAuthentication(); // leest de auth cookie uit
 
 app
     .UseStaticFiles()

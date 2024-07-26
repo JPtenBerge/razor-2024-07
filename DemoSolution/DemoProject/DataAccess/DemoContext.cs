@@ -1,9 +1,10 @@
 ﻿using DemoShared.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DemoProject.DataAccess;
 
-public class DemoContext : DbContext
+public class DemoContext : IdentityDbContext
 {
     public DbSet<Car> Cars { get; set; } = default!;
 
@@ -18,6 +19,8 @@ public class DemoContext : DbContext
     {
         //modelBuilder.ApplyConfigurationsFromAssembly
 
+        base.OnModelCreating(modelBuilder);
+        
         modelBuilder.Entity<Car>().Property(x => x.Make).HasMaxLength(50);
         modelBuilder.Entity<Car>().Property(x => x.Model).HasMaxLength(60);
         modelBuilder.Entity<Car>().Property(x => x.PhotoUrl).HasMaxLength(250);

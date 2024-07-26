@@ -1,0 +1,20 @@
+@page
+@model Auth
+
+@section title { Auth }
+
+<p>Status: @Model.Status</p>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>Ingelogd als @User.Identity.Name</p>
+}
+else
+{
+    <p>Niet ingelogd.</p>
+}
+
+<a asp-page-handler="register">Register</a> |
+<a asp-page-handler="login">Inloggen</a> |
+<a asp-page-handler="logout">Uitloggen</a> |
+<a asp-page-handler="do-nothing">Doe niks</a>
