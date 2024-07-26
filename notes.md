@@ -467,6 +467,97 @@ HTTP/2 sneller SPDY
 
 HTTP/3 sneller QUIC  Quality UDP Internet Connections
 
+## Auth
+
+- identificatie - wie je bent
+- authenticatie - bewijs dat je dat bent
+- autorisatie   - wat je mag op basis van wie je bent
+
+bewijs:
+- user/pass
+- email
+- biometriek
+  - iris-scan
+  - gezichtsherkenning
+    - foto
+  - vingerafdruk
+  - gewicht
+
+Soorten tokens:
+- JWT - JSON Web Token
+- SAML - Security Assertion Markup Language
+
+3 soorten JWT's
+- id token - wie jij bent
+- access token - iets mogen doen
+- refresh token - voor wanneer een access tokens vervalt, een verse nieuwe ophalen
+  - te gebruiken in offline situaties zonder interactie met een gebruiker
+
+Wanneer OAuth, wanneer eigen db met users/passes?
+
+- Zonder BFF ben ik minder fan van OAuth
+- MPA gaat traditioneel hand-in-hand met eigen db met users/passes
+- OAuth wanneer:
+  - je met third-party apps te maken hebt
+  - als je gebruikers niet wil verplichten om een account aan te maken bij jouw app
+  - gaat hand-in-hand met SPA
+  - je geen verantwoordelijkheid wil hebben over die securitykeuzes
+
+### OAuth
+
+Waar slaan we dat token op in onze browser?
+
+- cookie
+  - XSRF
+    - same-site origin?
+- local storage
+  - ieder JS kan erbij - XSS
+- session storage
+  - ieder JS kan erbij - XSS
+- in-memory
+  - als je met als closures werkt, dan kun je het token behoorlijk verbergen
+  - druk op F5 en je bent uitgelogd
+- indexed database/websql
+  - ieder JS kan erbij - XSS
+
+
+
+## Deployment
+
+- File system
+  => dotnet publish -c Release
+- Azure
+  => Publish...
+- IIS
+  => webserver met managementinterfaces
+  => ASP.NET Core 1.0/2.0  Kestrel
+
+  IIS <==> Kestrel <==> jouw code
+
+- Docker
+  - containerization of software
+
+orchestration
+- CI/CD
+- Kubernetes - k8s i18n l10n a11y accessibility
+- docker-compose
+- swarm
+
+### Docker-commando's
+
+SQL Server runnen:
+```sh
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Test1234!!Mummmwj@" -p 1533:1433 -d mcr.microsoft.com/mssql/server:2022-latest
+```
+
+App builden en runnen:
+```sh
+docker build -t demoproject  -f .\DemoProject\Dockerfile .
+
+docker run -e "connstring=Server=localhost,1533; Initial Catalog=demooooo; User Id=sa; Password=Test1234!!Mummmwj@; TrustServerCertificate=true" -p 8080:8080 -p 8081:8081 demoproject
+```
+
+
 ## Overig
 
 - [Async Guidance](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#prefer-asyncawait-over-directly-returning-task) - waarom niet gewoon de `Task` returnen zonder `await`?
