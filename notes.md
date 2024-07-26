@@ -389,6 +389,84 @@ DTOs bieden iets meer flexibiliteit doordat je wel velden kan toevoegen:
 }
 ```
 
+
+## Blazor
+
+- SPA
+- Microsoft
+  - Long-term support
+- Mensen:
+  - Steve Sanderson (OG programmer)
+    - heeft vroeger Knockout.js gemaakt
+  - Daniel Roth (programmamanager)
+- Gereleased in 2020 met .NET Core 3.1
+- Waarom?
+  - C# voor alles  <== het overtuigende argument
+  - 1 codebase
+
+
+Blazor komt in twee smaken:
+
+Blazor WebAssembly
+- alles wordt op de client gedaan
+  - al jouw code draait op de client
+  - Browser API: WebAssembly - low-level taaltje
+- runtime wordt OOK meegecompileerd
+- wil nog wel eens vrij groot zijn in data
+  - "Hello world" ~~7MB~~ 9.5MB
+- 👍👍👍👍👍 performance
+
+Blazor Server
+- alles wordt op de server gedaan
+  - al jouw code draait op de server
+    - je hebt toegang tot het filesystem/database/microservices
+- er wordt een continue openstaande WebSocket-verbinding opengehouden met de server
+  voor alles wat er met de UI gebeurt
+  - SignalR <== lib die MS maakt voor WebSocket-dingen
+- stabiliteit: bij geen/heel slecht internet is je UI zo goed als dood
+  - intranet app
+- het laadt een stuk sneller.
+
+Projecttemplate Blazor Web App komt met SSR en ondersteunt rendermodes per component
+
+## Realtime
+
+Typische realtime apps:
+
+- Messaging
+- Multiplayer games
+- Social media
+  - facebook
+  - Twitter
+  - Reddit
+- Beurs
+- Sport
+- Bezorgdiensten
+- (Fake)Nieuwswebsites
+- DevOps pipeline
+- StackOverflow
+- Google Docs/Sheets
+- Chatroom
+
+Realtime technieken:
+- Polling / long polling / no polling - veel HTTP-requests sturen, verbruiken veel data, latency
+- WebSockets - werkt met TCP. De huidige default, wat de meeste WebSocket-libs (socket.io, SignalR) wrappen
+- WebTransport - werkt met UDP
+- gRPC - een communicatieframework die ook streaming ondersteunt. Werkt nog niet lekker native in de browser, maar wellicht binnenkort/ooit wel.
+
+### HTTP-versies
+
+HTTP/1.1
+- TCP-kanaal opent
+- request sturen
+- response ontvangen
+- TCP-kanaal sluiten
+
+HTTP/2 sneller SPDY
+- TCP-kanaal hergebruik
+
+HTTP/3 sneller QUIC  Quality UDP Internet Connections
+
 ## Overig
 
 - [Async Guidance](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#prefer-asyncawait-over-directly-returning-task) - waarom niet gewoon de `Task` returnen zonder `await`?
