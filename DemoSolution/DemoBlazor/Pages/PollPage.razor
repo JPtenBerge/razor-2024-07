@@ -5,11 +5,11 @@
 
 @if (ActivePoll != null)
 {
-    <h2>@ActivePoll.Statement</h2>
+    <h2>@ActivePoll.Statement (@ActivePoll.TotalNrOfVotes)</h2>
     <ol>
         @foreach(var option in ActivePoll.Options)
         {
-            <li>@option.Text</li>
+            <li @onclick="() => Vote(option)">@option.Text (@option.NrOfVotes)</li>
         }
     </ol>
 }

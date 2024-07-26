@@ -22,16 +22,23 @@ public partial class PollPage
             ActivePoll = poll;
             StateHasChanged();
         });
-        _connection.On("vote", () =>
+        _connection.On("vote", (Poll poll) =>
         {
-
+            ActivePoll = poll;
+            StateHasChanged();
         });
         await _connection.StartAsync();
     }
 
-
     public async Task InitPoll()
     {
         await _connection.SendAsync("InitPoll", NewPoll);
+    }
+
+    public async Task Vote(Option option)
+    {
+        ActivePoll.TotalNrOfVotes++;
+        option.NrOfVotes++;
+        await _connection.SendAsync("Vote", ActivePoll);
     }
 }

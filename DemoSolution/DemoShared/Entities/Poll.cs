@@ -17,4 +17,6 @@ public class Poll
         new(),
         new()
     };
+
+    public int TotalNrOfVotes { get; set; }
 }

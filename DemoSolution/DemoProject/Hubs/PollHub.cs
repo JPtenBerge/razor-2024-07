@@ -9,4 +9,9 @@ public class PollHub : Hub
     {
         await Clients.All.SendAsync("init", newPoll);
     }
+
+    public async Task Vote(Poll poll)
+    {
+        await Clients.All.SendAsync("vote", poll);
+    }
 }
