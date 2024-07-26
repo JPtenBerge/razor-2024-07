@@ -11,6 +11,7 @@ using DemoProject.Hubs;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
+// builder.Host.
 
 // globale instellingen registreert
 // grote building blocks registreert
@@ -22,9 +23,17 @@ builder.Services.AddSignalR();
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<DemoContext>();
 
+
+var connString = builder.Configuration.GetConnectionString("DemoContext");
+if (Environment.GetEnvironmentVariable("connstring") != null)
+{
+    connString = Environment.GetEnvironmentVariable("connstring");
+}
+Console.WriteLine("Using connection string: " + connString);
+
 builder.Services.AddDbContext<DemoContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DemoContext"));
+    options.UseSqlServer(connString);
 }, ServiceLifetime.Transient);
 
 builder.Services.AddCors(options =>
